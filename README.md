@@ -8,10 +8,10 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
 [![Known Vulnerabilities](https://snyk.io/test/npm/react-styled-guide/badge.svg)](https://snyk.io/test/npm/react-styled-guide)
 
-<!-- TODO: add description -->
+React Styled Guide is a package that offers you an easy way to configure your own style guide and handle theme state in a React application build with Styled-Components.
 
 - [React Styled Guide](#react-styled-guide)
-  - [Requirement](#requirement)
+  - [Requirements](#requirements)
   - [Installation](#installation)
   - [Usage](#usage)
     - [Configure provider](#configure-provider)
@@ -48,10 +48,9 @@
     - [Example Application](#example-application)
   - [LICENSE](#license)
 
-## Requirement
+## Requirements
 
 - `react: >=18.2`
-- `typescript: >=4.9`
 - `styled-components: >=5.3`
 
 ## Installation
