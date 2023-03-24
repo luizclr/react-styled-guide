@@ -14,7 +14,7 @@ When a new release is proposed:
 
 ### Added
 
--
+- 
 
 ### Fixed
 
@@ -27,3 +27,14 @@ When a new release is proposed:
 ### Removed
 
 -
+
+## [1.0.0] - 2023-03-24
+
+### Added
+
+- add `ThemeContext`.
+- add `StyledGuideProvider`.
+- add `setLightTheme` and `setDarkTheme` actions.
+- add `useTheme` hook.
+- add `Colors`, `FontSizes`, `FontWeights`, `Sizes` tokens
+- add `getStyleGuide`, `getColorByTheme`, `getColor`, `getFontSize`, `getFontWeight`, `getSizes` helpers
