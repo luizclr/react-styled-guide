@@ -38,3 +38,4 @@ When a new release is proposed:
 - add `useTheme` hook.
 - add `Colors`, `FontSizes`, `FontWeights`, `Sizes` tokens
 - add `getStyleGuide`, `getColorByTheme`, `getColor`, `getFontSize`, `getFontWeight`, `getSizes` helpers
+- add tests.
