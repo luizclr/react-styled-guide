@@ -39,6 +39,7 @@ When a new release is proposed:
 - add `Colors`, `FontSizes`, `FontWeights`, `Sizes` tokens
 - add `getStyleGuide`, `getColorByTheme`, `getColor`, `getFontSize`, `getFontWeight`, `getSizes` helpers
 - add tests.
+- add example application into `example/` folder.
 
 ### Changed
 
