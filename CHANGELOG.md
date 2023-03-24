@@ -39,3 +39,7 @@ When a new release is proposed:
 - add `Colors`, `FontSizes`, `FontWeights`, `Sizes` tokens
 - add `getStyleGuide`, `getColorByTheme`, `getColor`, `getFontSize`, `getFontWeight`, `getSizes` helpers
 - add tests.
+
+### Changed
+
+- update README file to add documentation for helpers, schema/types and components.
