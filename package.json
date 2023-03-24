@@ -1,10 +1,12 @@
 {
   "name": "react-styled-guide",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "author": "Luiz Claudio",
+  "homepage": "https://github.com/luizclr/react-styled-guide",
+  "bugs": "https://github.com/luizclr/react-styled-guide/issues",
   "files": [
     "dist",
     "src"
@@ -15,25 +17,36 @@
   "scripts": {
     "start": "tsdx watch",
     "build": "tsdx build",
-    "test": "tsdx test --passWithNoTests",
-    "lint": "tsdx lint",
-    "prepare": "tsdx build",
+    "test": "tsdx test",
+    "test:watch": "yarn test --watch",
+    "test:coverage": "yarn test --coverage",
+    "test:coverage:watch": "yarn test:coverage --watch",
+    "lint": "tsdx lint .",
+    "lint:fix": "yarn lint --fix",
+    "prepare": "tsdx build ",
+    "prepare-husky": "husky install",
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
   "peerDependencies": {
-    "react": ">=16"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "tsdx lint"
-    }
+    "react": ">=18.2.0",
+    "styled-components": ">=5.3.8",
+    "typescript": ">=4.9.5"
   },
   "prettier": {
-    "printWidth": 80,
+    "arrowParens": "always",
+    "bracketSpacing": true,
+    "jsxBracketSameLine": false,
+    "jsxSingleQuote": false,
+    "printWidth": 100,
+    "proseWrap": "always",
+    "quoteProps": "as-needed",
     "semi": true,
-    "singleQuote": true,
-    "trailingComma": "es5"
+    "singleQuote": false,
+    "tabWidth": 2,
+    "trailingComma": "es5",
+    "useTabs": false,
+    "endOfLine": "auto"
   },
   "module": "dist/react-styled-guide.esm.js",
   "size-limit": [
@@ -48,12 +61,18 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^8.2.4",
+    "@testing-library/react": "^14.0.0",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/styled-components": "^5.1.26",
+    "babel-plugin-module-resolver": "^5.0.0",
     "husky": "^8.0.3",
+    "jest-styled-components": "^7.1.1",
+    "lint-staged": "^13.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "size-limit": "^8.2.4",
+    "styled-components": "^5.3.8",
     "tsdx": "^0.14.1",
     "tslib": "^2.5.0",
     "typescript": "^4.9.5"

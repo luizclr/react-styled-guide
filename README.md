@@ -1,160 +1,491 @@
-# TSDX React User Guide
+# React Styled Guide
 
-Congrats! You just saved yourself hours of work by bootstrapping this project with TSDX. Let’s get you oriented with what’s here and how to use it.
+![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)
+[![npm version](https://img.shields.io/npm/v/react-styled-guide.svg?style=flat)](https://www.npmjs.com/package/react-styled-guide)
+[![install size](https://img.shields.io/badge/dynamic/json?url=https://packagephobia.com/v2/api.json?p=react-styled-guide&query=$.install.pretty&label=install%20size&style=flat-square)](https://packagephobia.now.sh/result?p=react-styled-guide)
+[![npm bundle size](https://img.shields.io/bundlephobia/minzip/react-styled-guide?style=flat-square)](https://bundlephobia.com/package/react-styled-guide@latest)
+[![npm downloads](https://img.shields.io/npm/dm/react-styled-guide.svg?style=flat-square)](https://npm-stat.com/charts.html?package=react-styled-guide)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#contributing)
+[![Known Vulnerabilities](https://snyk.io/test/npm/react-styled-guide/badge.svg)](https://snyk.io/test/npm/react-styled-guide)
 
-> This TSDX setup is meant for developing React component libraries (not apps!) that can be published to NPM. If you’re looking to build a React-based app, you should use `create-react-app`, `razzle`, `nextjs`, `gatsby`, or `react-static`.
+React Styled Guide is a package that offers you an easy way to configure your own style guide and handle theme state in a React application build with Styled-Components.
 
-> If you’re new to TypeScript and React, checkout [this handy cheatsheet](https://github.com/sw-yx/react-typescript-cheatsheet/)
+- [React Styled Guide](#react-styled-guide)
+  - [Requirements](#requirements)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Configure provider](#configure-provider)
+  - [Examples](#examples)
+    - [Style](#style)
+    - [Theme](#theme)
+    - [Application](#application)
+  - [API](#api)
+    - [Schemes/Types](#schemestypes)
+      - [StyledGuideProps](#styledguideprops)
+      - [ThemeType](#themetype)
+      - [StyleGuide](#styleguide)
+      - [Colors](#colors)
+      - [ColorTokens](#colortokens)
+      - [FontSizes](#fontsizes)
+      - [FontWeights](#fontweights)
+      - [Sizes](#sizes)
+      - [UseThemeType](#usethemetype)
+    - [Style helpers](#style-helpers)
+      - [getStyleGuide()](#getstyleguide)
+      - [getColor()](#getcolor)
+      - [getColorByTheme()](#getcolorbytheme)
+      - [getFontSize()](#getfontsize)
+      - [getFontWeight()](#getfontweight)
+      - [getSize()](#getsize)
+    - [Theme hook](#theme-hook)
+      - [useTheme()](#usetheme)
+  - [Contributing](#contributing)
+    - [Cloning repository](#cloning-repository)
+    - [Installing dependencies](#installing-dependencies)
+    - [Developing](#developing)
+    - [Testing](#testing)
+    - [Linting](#linting)
+    - [Example Application](#example-application)
+  - [LICENSE](#license)
 
-## Commands
+## Requirements
 
-TSDX scaffolds your new library inside `/src`, and also sets up a [Parcel-based](https://parceljs.org) playground for it inside `/example`.
+- `react: >=18.2`
+- `styled-components: >=5.3`
 
-The recommended workflow is to run TSDX in one terminal:
+## Installation
 
-```bash
-npm start # or yarn start
-```
-
-This builds to `/dist` and runs the project in watch mode so any edits you save inside `src` causes a rebuild to `/dist`.
-
-Then run the example inside another:
-
-```bash
-cd example
-npm i # or yarn to install dependencies
-npm start # or yarn start
-```
-
-The default example imports and live reloads whatever is in `/dist`, so if you are seeing an out of date component, make sure TSDX is running in watch mode like we recommend above. **No symlinking required**, we use [Parcel's aliasing](https://parceljs.org/module_resolution.html#aliases).
-
-To do a one-off build, use `npm run build` or `yarn build`.
-
-To run tests, use `npm test` or `yarn test`.
-
-## Configuration
-
-Code quality is set up for you with `prettier`, `husky`, and `lint-staged`. Adjust the respective fields in `package.json` accordingly.
-
-### Jest
-
-Jest tests are set up to run with `npm test` or `yarn test`.
-
-### Bundle analysis
-
-Calculates the real cost of your library using [size-limit](https://github.com/ai/size-limit) with `npm run size` and visulize it with `npm run analyze`.
-
-#### Setup Files
-
-This is the folder structure we set up for you:
-
-```txt
-/example
-  index.html
-  index.tsx       # test your component here in a demo app
-  package.json
-  tsconfig.json
-/src
-  index.tsx       # EDIT THIS
-/test
-  blah.test.tsx   # EDIT THIS
-.gitignore
-package.json
-README.md         # EDIT THIS
-tsconfig.json
-```
-
-#### React Testing Library
-
-We do not set up `react-testing-library` for you yet, we welcome contributions and documentation on this.
-
-### Rollup
-
-TSDX uses [Rollup](https://rollupjs.org) as a bundler and generates multiple rollup configs for various module formats and build settings. See [Optimizations](#optimizations) for details.
-
-### TypeScript
-
-`tsconfig.json` is set up to interpret `dom` and `esnext` types, as well as `react` for `jsx`. Adjust according to your needs.
-
-## Continuous Integration
-
-### GitHub Actions
-
-Two actions are added by default:
-
-- `main` which installs deps w/ cache, lints, tests, and builds on all pushes against a Node and OS matrix
-- `size` which comments cost comparison of your library on every pull request using [`size-limit`](https://github.com/ai/size-limit)
-
-## Optimizations
-
-Please see the main `tsdx` [optimizations docs](https://github.com/palmerhq/tsdx#optimizations). In particular, know that you can take advantage of development-only optimizations:
-
-```js
-// ./types/index.d.ts
-declare var __DEV__: boolean;
-
-// inside your code...
-if (__DEV__) {
-  console.log('foo');
-}
-```
-
-You can also choose to install and use [invariant](https://github.com/palmerhq/tsdx#invariant) and [warning](https://github.com/palmerhq/tsdx#warning) functions.
-
-## Module Formats
-
-CJS, ESModules, and UMD module formats are supported.
-
-The appropriate paths are configured in `package.json` and `dist/index.js` accordingly. Please report if any issues are found.
-
-## Deploying the Example Playground
-
-The Playground is just a simple [Parcel](https://parceljs.org) app, you can deploy it anywhere you would normally deploy that. Here are some guidelines for **manually** deploying with the Netlify CLI (`npm i -g netlify-cli`):
+Using npm:
 
 ```bash
-cd example # if not already in the example folder
-npm run build # builds to dist
-netlify deploy # deploy the dist folder
+$ npm install react-styled-guide
 ```
 
-Alternatively, if you already have a git repo connected, you can set up continuous deployment with Netlify:
+Using yarn:
 
 ```bash
-netlify init
-# build command: yarn build && cd example && yarn && yarn build
-# directory to deploy: example/dist
-# pick yes for netlify.toml
+$ yarn add react-styled-guide
 ```
 
-## Named Exports
+## Usage
 
-Per Palmer Group guidelines, [always use named exports.](https://github.com/palmerhq/typescript#exports) Code split inside your React app instead of your React library.
+### Configure provider
 
-## Including Styles
+Once the package is installed, you can import the library using import or require approach:
 
-There are many ways to ship styles, including with CSS-in-JS. TSDX has no opinion on this, configure how you like.
+- **Step 1**: Import package provider (`StyledGuideProvider`) according to your JavaScript environment;
 
-For vanilla CSS, you can include it at the root directory and add it to the `files` section in your `package.json`, so that it can be imported separately by your users and run through their bundler's loader.
+CommonJS
 
-## Publishing to NPM
-
-We recommend using [np](https://github.com/sindresorhus/np).
-
-## Usage with Lerna
-
-When creating a new package with TSDX within a project set up with Lerna, you might encounter a `Cannot resolve dependency` error when trying to run the `example` project. To fix that you will need to make changes to the `package.json` file _inside the `example` directory_.
-
-The problem is that due to the nature of how dependencies are installed in Lerna projects, the aliases in the example project's `package.json` might not point to the right place, as those dependencies might have been installed in the root of your Lerna project.
-
-Change the `alias` to point to where those packages are actually installed. This depends on the directory structure of your Lerna project, so the actual path might be different from the diff below.
-
-```diff
-   "alias": {
--    "react": "../node_modules/react",
--    "react-dom": "../node_modules/react-dom"
-+    "react": "../../../node_modules/react",
-+    "react-dom": "../../../node_modules/react-dom"
-   },
+```jsx
+// index.jsx
+const { StyledGuideProvider } = require('react-styled-guide');
 ```
 
-An alternative to fixing this problem would be to remove aliases altogether and define the dependencies referenced as aliases as dev dependencies instead. [However, that might cause other problems.](https://github.com/palmerhq/tsdx/issues/64)
+ECMAScript
+
+```jsx
+// index.jsx
+import { StyledGuideProvider } from 'react-styled-guide';
+```
+
+TypeScript
+
+```tsx
+// index.tsx
+import { StyledGuideProvider, StyledGuideProps } from 'react-styled-guide';
+```
+
+- **Step 2**: Create your own StyleGuide using `StyledGuideProps` schema/type;
+
+CommonJS/ECMAScript:
+
+```jsx
+// index.jsx
+const initialStyleGuide = {
+  ...
+};
+```
+
+TypeScript:
+
+```tsx
+// index.tsx
+const initialStyleGuide: StyledGuideProps = {
+  ...
+};
+```
+
+- **Step 3**: wrap your components with `<StyledGuideProvider />` passing the initial state you have just created in previous step;
+
+```tsx
+ // index.tsx
+...
+
+const container = document.getElementById('root');
+const root = createRoot(container);
+root.render(
+  <StyledGuideProvider value={initialStyleGuide}>
+    {/* add your components here */}
+  </StyledGuideProvider>
+);
+
+```
+
+## Examples
+
+### Style
+
+Set a color of a text:
+
+```tsx
+// text.styles.jsx
+import { styled } from 'styled-components';
+import { getColor } from 'react-styled-guide';
+
+export const Text = styled.p`
+  color: ${getColor(colors => colors.primary.medium)}; // '#01c4e7'
+`;
+```
+
+### Theme
+
+Set theme to 'dark':
+
+```tsx
+// my-component.jsx
+const MyComponent = () => {
+  const { setDarkTheme } = useTheme();
+
+  return <Button onClick={setDarkTheme}>SET DARK THEME</Button>;
+};
+```
+
+### Application
+
+You can also check an entire application in `example/` folder:
+
+```bash
+$ cd example
+$ npm i # or yarn to install dependencies
+$ npm start # or yarn start
+```
+
+## API
+
+### Schemes/Types
+
+#### StyledGuideProps
+
+| key        | type                      | required | default |
+| ---------- | ------------------------- | :------: | :-----: |
+| theme      | [ThemeType](#themetype)   |  false   |    -    |
+| styleGuide | [StyleGuide](#styleguide) |   true   |    -    |
+
+#### ThemeType
+
+> `ThemeType` is a TypeScript `enum`. If you are using TypeScript you must pass a possible value as `string` (e.g.: 'DARK').
+
+| Option | value     |
+| ------ | --------- |
+| dark   | `'DARK'`  |
+| light  | `'LIGHT'` |
+
+#### StyleGuide
+
+| key         | type                        | required | default |
+| ----------- | --------------------------- | :------: | :-----: |
+| colors      | [Colors](#colors)           |   true   |    -    |
+| fontSizes   | [FontSizes](#fontsizes)     |   true   |    -    |
+| fontWeights | [FontWeights](#fontweights) |   true   |    -    |
+| sizes       | [Sizes](#sizes)             |   true   |    -    |
+
+#### Colors
+
+| key       | type                        | required | default |
+| --------- | --------------------------- | :------: | :-----: |
+| primary   | [ColorTokens](#colortokens) |   true   |    -    |
+| secondary | [ColorTokens](#colortokens) |   true   |    -    |
+| neutral   | [ColorTokens](#colortokens) |   true   |    -    |
+| success   | [ColorTokens](#colortokens) |   true   |    -    |
+| warning   | [ColorTokens](#colortokens) |   true   |    -    |
+| error     | [ColorTokens](#colortokens) |   true   |    -    |
+
+#### ColorTokens
+
+| key       |   type   | required | default |
+| --------- | :------: | :------: | :-----: |
+| darkest   | `string` |   true   |    -    |
+| darker    | `string` |   true   |    -    |
+| dark      | `string` |   true   |    -    |
+| tinyDark  | `string` |   true   |    -    |
+| medium    | `string` |   true   |    -    |
+| tinyLight | `string` |   true   |    -    |
+| light     | `string` |   true   |    -    |
+| lighter   | `string` |   true   |    -    |
+| lightest  | `string` |   true   |    -    |
+
+#### FontSizes
+
+| key  |   type   | required | default |
+| ---- | :------: | :------: | :-----: |
+| xxxl | `string` |   true   |    -    |
+| xxl  | `string` |   true   |    -    |
+| xl   | `string` |   true   |    -    |
+| l    | `string` |   true   |    -    |
+| m    | `string` |   true   |    -    |
+| s    | `string` |   true   |    -    |
+| xs   | `string` |   true   |    -    |
+| xxs  | `string` |   true   |    -    |
+| xxxs | `string` |   true   |    -    |
+
+#### FontWeights
+
+| key     |   type   | required | default |
+| ------- | :------: | :------: | :-----: |
+| bold    | `string` |   true   |    -    |
+| medium  | `string` |   true   |    -    |
+| regular | `string` |   true   |    -    |
+| light   | `string` |   true   |    -    |
+
+#### Sizes
+
+| key   |   type   | required | default |
+| ----- | :------: | :------: | :-----: |
+| giant | `string` |   true   |    -    |
+| huge  | `string` |   true   |    -    |
+| xxxl  | `string` |   true   |    -    |
+| xxl   | `string` |   true   |    -    |
+| xl    | `string` |   true   |    -    |
+| l     | `string` |   true   |    -    |
+| m     | `string` |   true   |    -    |
+| s     | `string` |   true   |    -    |
+| xs    | `string` |   true   |    -    |
+| xxs   | `string` |   true   |    -    |
+| xxxs  | `string` |   true   |    -    |
+| nano  | `string` |   true   |    -    |
+| quark | `string` |   true   |    -    |
+
+#### UseThemeType
+
+| key           | type                    |                    description                    |
+| ------------- | ----------------------- | :-----------------------------------------------: |
+| theme         | [ThemeType](#themetype) |                         -                         |
+| setDarkTheme  | `function`              | dispatch action to change theme state to `dark`.  |
+| setLightTheme | `function`              | dispatch action to change theme state to `light`. |
+
+### Style helpers
+
+#### getStyleGuide()
+
+- **Description**: Used to access [StyleGuide](#styleguide) object to get one of its children's value.
+- **Arguments**:
+  - `function(StyleGuide) => string | number`
+- **Returns**: `string` | `number`
+- **Example**:
+
+```jsx
+import { styled } from 'styled-components';
+import { getStyleGuide } from 'react-styled-guide';
+
+export const Text = styled.p`
+  color: ${getStyleGuide(
+    styleGuide => styleGuide.colors.primary.medium // e.g.: '#01c4e7'
+  )};
+`;
+```
+
+#### getColor()
+
+- **Description**: Used to access [Colors](#colors) object to get one of its value.
+- **Arguments**:
+  - `function(Colors) => string`
+- **Returns**: `string`
+- **Example**:
+
+```jsx
+import { styled } from 'styled-components';
+import { getColor } from 'react-styled-guide';
+
+export const Text = styled.p`
+  color: ${getColor(colors => colors.primary.medium)}; // e.g.: '#01c4e7'
+`;
+```
+
+#### getColorByTheme()
+
+- **Description**: Used to access [Colors](#colors) object to get one of its value according to `Theme` state.
+  - The **first** callback function argument will be called if `theme` is `DARK`.
+  - The **second** callback function argument will be called if `theme` is `LIGHT`.
+- **Arguments**:
+  - `function(Colors) => string`
+  - `function(Colors) => string`
+- **Returns**: `string`
+- **Example**:
+
+```jsx
+import { styled } from 'styled-components';
+import { getColorByTheme } from 'react-styled-guide';
+
+export const Text = styled.p`
+  color: ${getColorByTheme(
+    colors => colors.primary.darker, // e.g.: '#3F3F3F'
+    colors => colors.primary.lighter // e.g.: '#DADADA'
+  )};
+`;
+```
+
+#### getFontSize()
+
+- **Description**: Used to access [FontSizes](#fontsizes) object to get one of its value.
+- **Arguments**:
+  - `function(FontSizes) => string`
+- **Returns**: `string`
+- **Example**:
+
+```jsx
+import { styled } from 'styled-components';
+import { getFontSize } from 'react-styled-guide';
+
+export const Text = styled.p`
+  front-size: ${getFontSize(fontSizes => fontSizes.xs)}; // e.g.: '14px'
+`;
+```
+
+#### getFontWeight()
+
+- **Description**: Used to access [FontWeights](#fontweights) object to get one of its value.
+- **Arguments**:
+  - `function(FontWeights) => number`
+- **Returns**: `number`
+- **Example**:
+
+```jsx
+import { styled } from 'styled-components';
+import { getFontWeight } from 'react-styled-guide';
+
+export const Text = styled.p`
+  front-weight: ${getFontWeight(fontWeights => fontWeights.bold)}; // e.g.: 600
+`;
+```
+
+#### getSize()
+
+- **Description**: Used to access [Sizes](#sizes) object to get one of its value.
+- **Arguments**:
+  - `function(Sizes) => number`
+- **Returns**: `number`
+- **Example**:
+
+```jsx
+import { styled } from 'styled-components';
+import { getSize } from 'react-styled-guide';
+
+export const Card = styled.div`
+  height: ${getSize(sizes => sizes.giant)}; // e.g.: '200px'
+  padding: ${getSize(sizes => sizes.xxxs)}; // e.g.: '16px'
+`;
+```
+
+### Theme hook
+
+#### useTheme()
+
+- **Description**: Used to get [UseThemeType](#usethemetype) object to access and manipulate theme state.
+- **Arguments**: -
+- **Returns**: [UseThemeType](#usethemetype)
+- **Example**:
+
+```jsx
+import { ThemeTypes, useTheme } from 'react-styled-guide';
+
+export const App = () => {
+  const { theme, setDarkTheme, setLightTheme } = useTheme();
+
+  const changeTheme = () => {
+    if (theme === ThemeTypes.light) setDarkTheme();
+    else setLightTheme();
+  };
+
+  return (
+    <div>
+      <p>
+        Current Theme: <span>{theme}</span>
+      </p>
+      <button onClick={changeTheme}>CHANGE THEME</button>
+    </div>
+  );
+};
+```
+
+## Contributing
+
+This package welcomes all constructive contributions. Feel free to add contributions from the following items (but not only) :
+
+- bug fixes and enhancements
+- new features
+- additions and fixes to documentation
+- additional tests
+- triaging incoming pull requests and issues
+
+### Cloning repository
+
+```bash
+$ git clone https://github.com/luizclr/react-styled-guide.git
+$ cd react-styled-guide
+```
+
+### Installing dependencies
+
+```bash
+$ yarn install
+```
+
+### Developing
+
+Start development server on watch mode:
+
+```bash
+$ yarn start
+```
+
+### Testing
+
+Run test suite:
+
+```bash
+$ yarn test
+```
+
+### Building
+
+Run build script:
+
+```bash
+$ yarn build
+```
+
+> Check `dist/` folder to see parsing resulte.
+
+### Linting
+
+Run lint script:
+
+```bash
+$ yarn lint
+```
+
+### Example Application
+
+Enter in `example/` foder and start development server on watch mode:
+
+```bash
+$ cd example
+$ yarn start
+```
+
+Open a browser and access [localhost:1234](http://localhost:1234).
+
+## LICENSE
+
+[MIT](https://github.com/luizclr/react-styled-guide/blob/main/LICENSE)
