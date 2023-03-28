@@ -4,7 +4,7 @@ import { ThemeProvider as StyledComponentsProvider } from "styled-components";
 import { StyledGuideProps } from "./types";
 
 import { ThemeTypes } from "../../types";
-import { ThemeContext } from "../context/theme-context";
+import { ThemeContext } from "../context";
 import { ThemeReducer } from "../reducer";
 import { initialThemeState, ThemeState } from "../theme-state";
 

@@ -28,6 +28,12 @@ When a new release is proposed:
 
 -
 
+## [1.1.0] - 2023-03-28
+
+### Added
+
+- Export `ThemeContext`.
+
 ## [1.0.0] - 2023-03-24
 
 ### Added

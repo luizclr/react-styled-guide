@@ -184,9 +184,7 @@ $ npm start # or yarn start
 
 #### ThemeType
 
-> `ThemeType` is a TypeScript `enum`. If you are using TypeScript you must pass a possible value as `string` (e.g.: 'DARK').
-
-| Option | value     |
+| key    | value     |
 | ------ | --------- |
 | dark   | `'DARK'`  |
 | light  | `'LIGHT'` |
