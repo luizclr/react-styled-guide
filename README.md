@@ -170,6 +170,9 @@ $ cd example
 $ npm i # or yarn to install dependencies
 $ npm start # or yarn start
 ```
+now open live server at [http://localhost:1234](http://localhost:1234).
+
+> That page is deployed in [luizclr.github.io/react-styled-guide](https://luizclr.github.io/react-styled-guide/).
 
 ## API
 
@@ -479,6 +482,7 @@ Enter in `example/` foder and start development server on watch mode:
 
 ```bash
 $ cd example
+$ yarn install
 $ yarn start
 ```
 

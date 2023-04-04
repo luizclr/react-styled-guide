@@ -85,7 +85,8 @@ export const Welcome = (): ReactElement => {
     <Container>
       <Content>
         <Title>React Styled Guide</Title>
-        <Section>
+        <Subtitle>Example page</Subtitle>
+        <Section className="mt-2">
           <Subtitle>
             Theme: <Span>{theme.toLocaleLowerCase()}</Span>
           </Subtitle>
@@ -149,6 +150,15 @@ export const Welcome = (): ReactElement => {
             <Col>
               <Subtitle>Reference:</Subtitle>
               <LinksWrapper>
+                <Row isWrapped={true}>
+                  <Text>Source code: </Text>
+                  <Link
+                    href="https://github.com/luizclr/react-styled-guide/tree/main/example"
+                    target="_blank"
+                  >
+                    github.com/luizclr/react-styled-guide/tree/main/example
+                  </Link>
+                </Row>
                 <Row isWrapped={true}>
                   <Text>Documentation: </Text>
                   <Link href="https://github.com/luizclr/react-styled-guide" target="_blank">

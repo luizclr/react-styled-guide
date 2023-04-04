@@ -5,12 +5,12 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html && sh fix-path.sh"
   },
   "dependencies": {
     "react": ">=18",
     "react-app-polyfill": "^1.0.0",
-    "react-styled-guide": "^0.2.0",
+    "react-styled-guide": "../",
     "styled-components": ">=5"
   },
   "alias": {

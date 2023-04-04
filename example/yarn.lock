@@ -4520,10 +4520,8 @@ react-is@^16.7.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
-react-styled-guide@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/react-styled-guide/-/react-styled-guide-0.2.0.tgz#fad7d54a39ba0d8f15d950521d205d554b54fa55"
-  integrity sha512-gr+CxECKwUQz08LvcHKXZHk7X7oMikzPV7fBKNGZAjU021V31cYDDk3Vw/5padIOgkiPQ3iUWUefpHCxCAt1ng==
+react-styled-guide@../:
+  version "1.1.0"
 
 react@>=18:
   version "18.2.0"
